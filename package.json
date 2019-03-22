@@ -1,0 +1,26 @@
+{
+  "name": "jspagerduty",
+  "version": "1.0.0",
+  "description": "Javascript PagerDuty API",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sighmir/jsPagerDuty.git"
+  },
+  "author": "Guilherme Caulada (Sighmir)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Sighmir/jsPagerDuty/issues"
+  },
+  "homepage": "https://github.com/Sighmir/jsPagerDuty#readme",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  },
+  "keywords": [
+    "pagerduty"
+  ]
+}
