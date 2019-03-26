@@ -1,23 +1,19 @@
-if (!isNode) {
-    function isNode() {
-        return typeof module !== 'undefined' && module.exports
-    }
+isNode = () => {
+    return typeof module !== 'undefined' && module.exports
 }
 
-if (!ExtendableProxy) {
-    class ExtendableProxy {
-        constructor(getset = {}) {
-            return new Proxy(this, getset);
-        }
+ExtendableProxy = class {
+    constructor(getset = {}) {
+        return new Proxy(this, getset);
     }
 }
 
 class PagerDutyAPI extends ExtendableProxy {
     constructor(email,token) {
         super({
-            get: function (pdapi, func) {
+            get: (pdapi, func) => {
                 if (pdapi[func] != null) return pdapi[func]
-                return function (...params) { return pdapi.perform(func, ...params) }
+                return (...params) => { return pdapi.perform(func, ...params) }
             }
         })
         this.url = 'https://api.pagerduty.com/'
@@ -31,7 +27,7 @@ class PagerDutyAPI extends ExtendableProxy {
 
     send(method, path, params) {
         var self = this
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var request = false
             if (isNode()) {
                 request = require('xmlhttprequest').XMLHttpRequest
@@ -45,7 +41,7 @@ class PagerDutyAPI extends ExtendableProxy {
                     http_request.setRequestHeader(h, self.headers[h])
                 }
                 http_request.send(JSON.stringify(params));
-                http_request.onreadystatechange = function () {
+                http_request.onreadystatechange = () => {
                     if (http_request.readyState == 4) {
                         resolve(JSON.parse(http_request.responseText))
                     }
