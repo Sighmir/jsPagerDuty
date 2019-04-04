@@ -1,6 +1,6 @@
 {
   "name": "jspagerduty",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Javascript PagerDuty API",
   "main": "index.js",
   "directories": {
