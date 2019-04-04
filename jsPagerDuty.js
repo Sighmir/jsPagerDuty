@@ -40,10 +40,16 @@ class PagerDutyAPI extends ExtendableProxy {
                 for (var h in self.headers) {
                     http_request.setRequestHeader(h, self.headers[h])
                 }
-                http_request.send(JSON.stringify(params));
+                http_request.send(JSON.stringify(params))
                 http_request.onreadystatechange = () => {
-                    if (http_request.readyState == 4) {
-                        resolve(JSON.parse(http_request.responseText))
+                    if (http_request.statusText == 'OK' || Number(http_request.status.toString()[0]) == 2) {
+                        if (http_request.readyState == 4) {
+                            resolve(JSON.parse(http_request.responseText))
+                        } else {
+                            reject(http_request.responseText)
+                        }
+                    } else {
+                        reject(http_request.responseText)
                     }
                 }
             } else {
