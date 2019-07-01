@@ -185,7 +185,9 @@ class PagerDutyAPI extends ExtendableProxy {
         for (var p in obj)
             if (obj.hasOwnProperty(p)) {
                 if (obj[p].constructor.name == 'Array') {
-                    str.push(encodeURIComponent(p+'[]') + '=' + encodeURIComponent(obj[p]))
+                    for (let e of obj[p]) {
+                        str.push(encodeURIComponent(p+'[]') + '=' + encodeURIComponent(e))
+                    }
                 } else {
                     str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
                 }
